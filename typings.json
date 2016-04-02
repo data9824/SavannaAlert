@@ -1,0 +1,13 @@
+{
+  "name": "hello-electron",
+  "dependencies": {},
+  "devDependencies": {},
+  "ambientDependencies": {
+    "github-electron": "github:DefinitelyTyped/DefinitelyTyped/github-electron/github-electron.d.ts#88cc695e1f75df3c2da8a0c68e535f35ee806638",
+    "jquery": "github:DefinitelyTyped/DefinitelyTyped/jquery/jquery.d.ts#661fc869669af796c6048483e999dce5732eed72",
+    "node": "github:DefinitelyTyped/DefinitelyTyped/node/node.d.ts#48c1e3c1d6baefa4f1a126f188c27c4fefd36bff",
+    "node-notifier": "registry:dt/node-notifier#0.0.0+20160316155526",
+    "vue": "github:DefinitelyTyped/DefinitelyTyped/vue/vue.d.ts#88a3ea263eba30418924f53331a00376c51c2f54",
+    "vue-router": "github:DefinitelyTyped/DefinitelyTyped/vue-router/vue-router.d.ts#0146caf10cf880cd83c311862cc65862b9cb919b"
+  }
+}
