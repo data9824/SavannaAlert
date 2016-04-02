@@ -50,7 +50,7 @@ app.on('ready', () => {
 		{
 			label: "バージョン情報...",
 			click: () => {
-				dialog.showErrorBox("バージョン情報", "バージョン 20160402");
+				dialog.showErrorBox("バージョン情報", "バージョン 20160402-2");
 			},
 		},
 		{

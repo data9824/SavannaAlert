@@ -7,6 +7,7 @@ import VueComponent from 'vue-class-component';
 import * as $ from 'jquery';
 import * as electron from 'electron';
 let ipcRenderer: Electron.IpcRenderer = require('electron').ipcRenderer;
+let clipboard: Electron.Clipboard = require('electron').clipboard;
 
 interface IChannel {
 	url: string;
@@ -74,6 +75,7 @@ class ChannelListView extends Vue {
 @VueComponent({
 	template: `
 		<form class="channelForm" v-on:submit.prevent="onSubmit">
+			<input type="button" v-on:click="onPaste" value="貼り付け">
 			<input class="url" type="text" placeholder="チャンネルのURL" v-model="url"/>
 			<input type="submit" value="追加"/>
 		</form>
@@ -85,6 +87,9 @@ class ChannelFormView extends Vue {
 		return {
 			url: '',
 		};
+	}
+	public onPaste(): void {
+		this.url = clipboard.readText("selection");
 	}
 	public onSubmit(): void {
 		if (this.url === '') {
