@@ -15,6 +15,7 @@ let notifier: NodeNotifier = require('node-notifier');
 let app: Electron.App = electron.app;
 let dialog: Electron.Dialog = electron.dialog;
 let mainWindow: BrowserWindow = undefined;
+let tray: Electron.Tray = undefined;
 
 function createWindow() {
 	'use strict';
@@ -39,7 +40,7 @@ function createWindow() {
 }
 
 app.on('ready', () => {
-	let tray: Electron.Tray = new electron.Tray(__dirname + "/../browser/tray.png");
+	tray = new electron.Tray(__dirname + "/../browser/tray.png");
 	let contextMenu: Electron.Menu = electron.Menu.buildFromTemplate([
 		{
 			label: "設定...",
@@ -50,7 +51,7 @@ app.on('ready', () => {
 		{
 			label: "バージョン情報...",
 			click: () => {
-				dialog.showErrorBox("バージョン情報", "バージョン 20160402-3");
+				dialog.showErrorBox("バージョン情報", "バージョン 20160403");
 			},
 		},
 		{
@@ -125,7 +126,7 @@ function alertChannels(): void {
 						notifier.notify({
 							title: title,
 							message: url,
-							icon: __dirname + "/../browser/tray.png",
+							icon: __dirname + "/../browser/notification.png",
 							sound: true,
 							wait: true,
 						});
