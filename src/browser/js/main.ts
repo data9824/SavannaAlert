@@ -31,9 +31,9 @@ class AppModel {
 	}
 	public channels: IChannel[] = [];
 	public fireChanged(): void {
-		for (let i: number = 0; i < this.listeners.length; ++i) {
-			this.listeners[i].onAppModelChanged(this);
-		}
+		this.listeners.forEach((listener: IAppModelListener) => {
+			listener.onAppModelChanged(this);
+		});
 	}
 }
 
@@ -44,13 +44,13 @@ let appModel: AppModel = new AppModel();
 		<div class="channel">
 			<a v-on:click.prevent="openPage" href="#">{{ item.url }}</a>
 			{{ item.title }}
-			<input class="delete" type="button" value="削除" v-on:click="delete(item)"/>
+			<input class="delete" type="button" value="削除" v-on:click="remove(item)"/>
 		</div>
 	`,
 	props: ["item", "index"],
 })
 class ChannelView extends Vue {
-	public delete(item: IChannel): void
+	public remove(item: IChannel): void
 	{
 		appModel.channels.splice(this.$get("index"), 1);
 		ipcRenderer.send("save", JSON.stringify(appModel.channels));
@@ -92,7 +92,9 @@ class ChannelFormView extends Vue {
 		this.url = clipboard.readText("selection");
 	}
 	public onSubmit(): void {
-		if (this.url === '') {
+		const regexp = new RegExp("^(.+[^.]\.)?afreecatv\.jp");
+		if (this.url === '' || !this.url.match(regexp)) {
+			this.url = '';
 			return;
 		}
 		this.$dispatch('add-channel', {
