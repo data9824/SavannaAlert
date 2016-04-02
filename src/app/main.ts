@@ -105,15 +105,15 @@ setInterval(() => {
 
 function alertChannels(): void {
 	channels.forEach((channel: IChannel) => {
-		http.get(channel.url, (res: IncomingMessage) => {
+		let request = http.get(channel.url, (res: IncomingMessage) => {
 			let url: string = channel.url;
 			let body: string = "";
 			res.setEncoding("utf8");
 			res.on("data", (chunk: string) => {
 				body += chunk;
 			});
-			res.on("error", (e) => {
-				console.log(`Conection Error : ${e.message}`);
+			res.on("error", (error) => {
+				console.log(`Conection Error : ${error.message}`);
 			});
 			res.on("end", () => {
 				let title: string = extractChannelTitle(body);
@@ -137,6 +137,9 @@ function alertChannels(): void {
 					lastChannelBroadcastings[url] = false;
 				}
 			});
+		});
+		request.on("error", (error) => {
+			console.log(`Conection Error : ${error.message}`);
 		});
 	});
 }
