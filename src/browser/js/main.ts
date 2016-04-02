@@ -30,9 +30,9 @@ class AppModel {
 	}
 	public channels: IChannel[] = [];
 	public fireChanged(): void {
-		for (let i: number = 0; i < this.listeners.length; ++i) {
-			this.listeners[i].onAppModelChanged(this);
-		}
+		this.listeners.forEach((listener: IAppModelListener) => {
+			listener.onAppModelChanged(this);
+		});
 	}
 }
 
@@ -87,7 +87,9 @@ class ChannelFormView extends Vue {
 		};
 	}
 	public onSubmit(): void {
-		if (this.url === '') {
+		const regexp = new RegExp("^(.+[^.]\.)?afreecatv\.jp");
+		if (this.url === '' || !this.url.match(regexp)) {
+			this.url = '';
 			return;
 		}
 		this.$dispatch('add-channel', {

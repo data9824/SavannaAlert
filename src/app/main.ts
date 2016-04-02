@@ -112,6 +112,9 @@ function alertChannels(): void {
 			res.on("data", (chunk: string) => {
 				body += chunk;
 			});
+			res.on("error", (e) => {
+				console.log(`Conection Error : ${e.message}`);
+			});
 			res.on("end", () => {
 				let title: string = extractChannelTitle(body);
 				let broadcasting: boolean = checkBroadcasting(body);
