@@ -137,6 +137,13 @@ function alertChannels(): void {
 				} else {
 					lastChannelBroadcastings[url] = false;
 				}
+				if (mainWindow !== undefined) {
+					mainWindow.webContents.send("updateChannelStatus", JSON.stringify({
+						url: url,
+						title: title,
+						broadcasting: broadcasting,
+					}));
+				}
 			});
 		});
 		request.on("error", (error) => {
@@ -157,7 +164,6 @@ function getConfigFileName(): string {
 let ipcMain: IPCMain = require('electron').ipcMain;
 ipcMain.on("save", (event: IPCMainEvent, arg: string) => {
 	channels = JSON.parse(arg);
-	console.log(app.getPath('userData'));
 	let config: IConfig = {
 		version: 1,
 		channels: channels,
@@ -166,6 +172,9 @@ ipcMain.on("save", (event: IPCMainEvent, arg: string) => {
 });
 ipcMain.on("getChannels", (event: IPCMainEvent) => {
 	event.sender.send("getChannels", JSON.stringify(channels));
+});
+ipcMain.on("alertChannels", (event: IPCMainEvent) => {
+	alertChannels();
 });
 
 try {

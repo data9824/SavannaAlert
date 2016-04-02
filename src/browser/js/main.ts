@@ -39,17 +39,47 @@ class AppModel {
 
 let appModel: AppModel = new AppModel();
 
+interface IChannelStatus {
+	url: string;
+	title: string;
+	broadcasting: boolean;
+}
+
 @VueComponent({
 	template: `
 		<div class="channel">
+			{{ broadcasting }}
+			{{ title }}
 			<a v-on:click.prevent="openPage" href="#">{{ item.url }}</a>
-			{{ item.title }}
 			<input class="delete" type="button" value="削除" v-on:click="remove(item)"/>
 		</div>
 	`,
 	props: ["item", "index"],
 })
 class ChannelView extends Vue {
+	private title: string;
+	private broadcasting: string;
+	private updateChannelStatus: Function;
+	public data(): any {
+		return {
+			title: "",
+			broadcasting: "",
+		}
+	}
+	public attached(): void {
+		this.updateChannelStatus = (e: any, arg: string) => {
+			let channelStatus: IChannelStatus = JSON.parse(arg);
+			if (channelStatus.url === this.$get("item").url) {
+				this.title = channelStatus.title;
+				this.broadcasting = channelStatus.broadcasting ? "ON-AIR" : "OFF-AIR";
+			}
+		};
+		ipcRenderer.on("updateChannelStatus", this.updateChannelStatus);
+	}
+	public detached(): void {
+		ipcRenderer.removeListener("updateChannelStatus", this.updateChannelStatus);
+		this.updateChannelStatus = undefined;
+	}
 	public remove(item: IChannel): void
 	{
 		appModel.channels.splice(this.$get("index"), 1);
@@ -129,6 +159,7 @@ class ChannelBoxView extends Vue implements IAppModelListener {
 		ipcRenderer.on("getChannels", (e: any, arg: string) => {
 			appModel.channels = JSON.parse(arg);
 			appModel.fireChanged();
+			ipcRenderer.send("alertChannels"); // to update channel status
 		});
 		appModel.addListener(this);
 	}
@@ -142,6 +173,7 @@ class ChannelBoxView extends Vue implements IAppModelListener {
 		});
 		ipcRenderer.send("save", JSON.stringify(appModel.channels));
 		appModel.fireChanged();
+		ipcRenderer.send("alertChannels"); // to update channel status
 	}
 	public onAppModelChanged(sender: AppModel): void {
 		this.channels = appModel.channels;
