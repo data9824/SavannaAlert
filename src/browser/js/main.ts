@@ -138,7 +138,7 @@ class ChannelListView extends Vue {
 					mdl-js-ripple-effect
 					mdl-button--colored"
 				v-on:click="onPaste"
-			/><i class="fa fa-clipboard">貼り付け</i></button>
+			/><i class="fa fa-clipboard"> 貼り付け</i></button>
 			<button
 				class="
 					add
@@ -148,7 +148,7 @@ class ChannelListView extends Vue {
 					mdl-js-ripple-effect
 					mdl-button--colored"
 					v-on:click="onSubmit"
-			><i class="fa fa-plus">追加</i></button>
+			><i class="fa fa-plus"> 追加</i></button>
 		</form>
 	`,
 })

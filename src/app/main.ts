@@ -24,7 +24,7 @@ function createWindow() {
 		return;
 	}
 	let browserWindowOptions: Electron.BrowserWindowOptions = {
-		width: 560,
+		width: 600,
 		height: 600,
 		webPreferences: {
 			plugins: true,
