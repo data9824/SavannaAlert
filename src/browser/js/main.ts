@@ -84,8 +84,8 @@ class ChannelView extends Vue {
 			let channelStatus: IChannelStatus = JSON.parse(arg);
 			if (channelStatus.url === this.$get("item").url) {
 				this.title = channelStatus.title;
-				const onair: string = `<i class="fa-2x fa fa-video-camera"></i>`;
-				const offair: string = `<i class="fa-2x fa fa-times"></i>`;
+				const onair: string = `<i class="onair fa-2x fa fa-microphone"></i>`;
+				const offair: string = `<i class="offair fa-2x fa fa-microphone-slash"></i>`;
 				this.broadcasting = channelStatus.broadcasting ? onair : offair;
 			}
 		};
@@ -119,15 +119,15 @@ class ChannelListView extends Vue {
 
 @VueComponent({
 	template: `
-		<form class="channelForm">
+		<form v-on:submit.prevent class="channelForm">
 			<div class="url-form mdl-textfield mdl-js-textfield">
 				<input
 					id="channel-url"
 					class="url mdl-textfield__input"
+					placeholder="チャンネルのURL"
 					type="text"
 					v-model="url"
 				/>
-				<label class="mdl-textfield__label" for="channel-url">チャンネルのURL</label>
 			</div>
 			<button
 				class="
@@ -138,7 +138,7 @@ class ChannelListView extends Vue {
 					mdl-js-ripple-effect
 					mdl-button--colored"
 				v-on:click="onPaste"
-			/>貼付<i class="fa fa-clipboard"></i></button>
+			/><i class="fa fa-clipboard">貼り付け</i></button>
 			<button
 				class="
 					add
@@ -148,7 +148,7 @@ class ChannelListView extends Vue {
 					mdl-js-ripple-effect
 					mdl-button--colored"
 					v-on:click="onSubmit"
-			>追加<i class="fa fa-plus"></i>/button>
+			><i class="fa fa-plus">追加</i></button>
 		</form>
 	`,
 })
