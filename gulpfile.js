@@ -11,7 +11,7 @@ gulp.task('clean', function() {
 
 gulp.task('copy', function() {
 	gulp.src(
-		[ 'src/**/*', '!src/browser/js/*', '!src/browser/css/*', '!src/**/*.ts' ],
+		[ 'src/**/*', '!src/browser/js/*.ts', '!src/browser/css/*.sass', '!src/**/*.ts' ],
 		{ base: 'src' }
 	).pipe(gulp.dest('dist'));
 });

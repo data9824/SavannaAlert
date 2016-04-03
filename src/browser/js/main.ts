@@ -48,10 +48,23 @@ interface IChannelStatus {
 @VueComponent({
 	template: `
 		<div class="channel">
-			{{ broadcasting }}
-			{{ title }}
-			<a v-on:click.prevent="openPage" href="#">{{ item.url }}</a>
-			<input class="delete" type="button" value="削除" v-on:click="remove(item)"/>
+			<div class="live-icon">
+				{{{ broadcasting }}}
+			</div>
+			<div class="live-title">
+				{{{ title }}}
+			</div>
+			<a class="address" v-on:click.prevent="openPage" href="#">{{ item.url }}</a>
+			<button
+				class="
+					remove
+					savanna-button
+					mdl-button
+					mdl-js-button
+					mdl-js-ripple-effect
+					mdl-button--colored"
+				v-on:click="remove(item)"
+			><i class="fa fa-trash"></i></button>
 		</div>
 	`,
 	props: ["item", "index"],
@@ -71,7 +84,9 @@ class ChannelView extends Vue {
 			let channelStatus: IChannelStatus = JSON.parse(arg);
 			if (channelStatus.url === this.$get("item").url) {
 				this.title = channelStatus.title;
-				this.broadcasting = channelStatus.broadcasting ? "ON-AIR" : "OFF-AIR";
+				const onair: string = `<i class="fa-2x fa fa-video-camera"></i>`;
+				const offair: string = `<i class="fa-2x fa fa-times"></i>`;
+				this.broadcasting = channelStatus.broadcasting ? onair : offair;
 			}
 		};
 		ipcRenderer.on("updateChannelStatus", this.updateChannelStatus);
@@ -104,10 +119,36 @@ class ChannelListView extends Vue {
 
 @VueComponent({
 	template: `
-		<form class="channelForm" v-on:submit.prevent="onSubmit">
-			<input type="button" v-on:click="onPaste" value="貼り付け">
-			<input class="url" type="text" placeholder="チャンネルのURL" v-model="url"/>
-			<input type="submit" value="追加"/>
+		<form class="channelForm">
+			<div class="url-form mdl-textfield mdl-js-textfield">
+				<input
+					id="channel-url"
+					class="url mdl-textfield__input"
+					type="text"
+					v-model="url"
+				/>
+				<label class="mdl-textfield__label" for="channel-url">チャンネルのURL</label>
+			</div>
+			<button
+				class="
+					paste
+					savanna-button
+					mdl-button
+					mdl-js-button
+					mdl-js-ripple-effect
+					mdl-button--colored"
+				v-on:click="onPaste"
+			/>貼付<i class="fa fa-clipboard"></i></button>
+			<button
+				class="
+					add
+					savanna-button
+					mdl-button
+					mdl-js-button
+					mdl-js-ripple-effect
+					mdl-button--colored"
+					v-on:click="onSubmit"
+			>追加<i class="fa fa-plus"></i>/button>
 		</form>
 	`,
 })
@@ -119,7 +160,7 @@ class ChannelFormView extends Vue {
 		};
 	}
 	public onPaste(): void {
-		this.url = clipboard.readText("selection");
+		this.url = clipboard.readText("selection").trim();
 	}
 	public onSubmit(): void {
 		const regexp = new RegExp("^(.+[^.]\.)?afreecatv\.jp");
@@ -141,7 +182,6 @@ interface IAddingChannel {
 @VueComponent({
 	template: `
 		<div class="channelBox">
-			<h1>チャンネル一覧</h1>
 			<channel-list :channels="channels"></channel-list>
 			<channel-form v-on:add-channel="addChannel"></channel-form>
 		</div>
@@ -169,7 +209,7 @@ class ChannelBoxView extends Vue implements IAppModelListener {
 	public addChannel(item: IAddingChannel): void {
 		appModel.channels.push({
 			url: item.url,
-			title: "",
+			title: '',
 		});
 		ipcRenderer.send("save", JSON.stringify(appModel.channels));
 		appModel.fireChanged();

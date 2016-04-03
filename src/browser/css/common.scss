@@ -11,3 +11,67 @@ body {
 .channelForm .url {
 	width: 20em;
 }
+
+.mdl-layout__header-row {
+	padding-left: 32px;
+}
+
+.url-form {
+	width: 200px;
+}
+
+#channel-url {
+	width: 200px;
+}
+
+a.address {
+	color: rgb(26, 13, 171) !important;
+}
+
+.paste {
+	color: rgb(60, 74, 63) !important;
+}
+
+.add {
+	color: rgb(0, 39, 255) !important;
+}
+
+.remove {
+	color: rgb(255, 106, 152) !important;
+	min-width: 30px !important;
+	width: 30px !important;
+}
+
+.savanna-button {
+	padding: 0px 10px;
+	min-width: 65px;
+	font-size: 14px;
+	width: 65px;
+}
+
+.mdl-list {
+	font-size: 14px;
+	padding: 0px;
+	min-height: 30px;
+}
+
+.mdl-list__item {
+	font-size: 14px;
+	padding: 0px;
+	min-height: 30px;
+}
+
+.live-icon {
+	text-align: center;
+	width: 60px;
+	min-width: 60px;
+	float: left;
+}
+
+.live-title {
+	margin-top: 5px;
+	text-align: left;
+	width: 200px;
+	min-width: 200px;
+	float: left;
+}
