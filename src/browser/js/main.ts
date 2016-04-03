@@ -57,12 +57,10 @@ interface IChannelStatus {
 			<a class="address" v-on:click.prevent="openPage" href="#">{{ item.url }}</a>
 			<button
 				class="
-					remove
-					savanna-button
 					mdl-button
-					mdl-js-button
-					mdl-js-ripple-effect
-					mdl-button--colored"
+					mdl-button--accent
+					mdl-button--icon
+					mdl-js-button"
 				v-on:click="remove(item)"
 			><i class="fa fa-trash"></i></button>
 		</div>
@@ -131,24 +129,19 @@ class ChannelListView extends Vue {
 			</div>
 			<button
 				class="
-					paste
-					savanna-button
 					mdl-button
 					mdl-js-button
-					mdl-js-ripple-effect
-					mdl-button--colored"
+					mdl-js-ripple-effect"
 				v-on:click="onPaste"
-			/><i class="fa fa-clipboard"> 貼り付け</i></button>
+			/><i class="fa fa-clipboard"></i> 貼り付け</button>
 			<button
 				class="
-					add
-					savanna-button
 					mdl-button
+					mdl-button--primary
 					mdl-js-button
-					mdl-js-ripple-effect
-					mdl-button--colored"
+					mdl-js-ripple-effect"
 					v-on:click="onSubmit"
-			><i class="fa fa-plus"> 追加</i></button>
+			><i class="fa fa-plus"></i> 追加</button>
 		</form>
 	`,
 })

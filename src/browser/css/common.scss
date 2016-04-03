@@ -1,8 +1,5 @@
-html {
-}
-
-body {
-  font-family: "Droid Sans", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+body, .mdl-layout-title, .mdl-textfield__input, .mdl-button {
+	font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
 }
 
 .urlText {
@@ -10,7 +7,7 @@ body {
 }
 
 .mdl-layout__header-row {
-	padding-left: 2em;
+	padding-left: 1em;
 }
 
 .url-form {
@@ -24,21 +21,7 @@ body {
 
 a.address {
 	width: 40%;
-	color: rgb(26, 13, 171) !important;
-}
-
-.paste {
-	color: rgb(60, 74, 63) !important;
-}
-
-.add {
-	color: rgb(0, 39, 255) !important;
-}
-
-.remove {
-	color: rgb(255, 106, 152) !important;
-	min-width: 2.1em !important;
-	width: 2.1em !important;
+	color: rgb(26, 13, 171);
 }
 
 .onair {
@@ -46,31 +29,11 @@ a.address {
 }
 
 .offair {
-	color: rgb(150, 150, 150);
-}
-
-.savanna-button {
-	min-width: 8em;
-	font-size: 1em;
-	width: 18%;
-}
-
-.mdl-list {
-	font-size: 1em;
-	padding: 0;
-	min-height: 2.1em;
-}
-
-.mdl-list__item {
-	font-size: 1em;
-	padding: 0;
-	min-height: 2.1em;
+	color: rgb(224, 224, 224);
 }
 
 .live-icon {
-	text-align: center;
-	width: 5em;
-	min-width: 5em;
+	width: 3em;
 	float: left;
 }
 
