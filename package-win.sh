@@ -3,6 +3,12 @@
 rm -rf pack/SavannaAlert-win32-ia32/
 ./node_modules/.bin/electron-packager . SavannaAlert --platform=win32 --arch=ia32 --version=0.36.12 \
     --ignore=pack --ignore=src --ignore=typings --ignore=build --ignore=.idea --ignore=resources \
+    --ignore=node_modules/del \
+    --ignore=node_modules/gulp \
+    --ignore=node_modules/gulp-sass \
+    --ignore=node_modules/gulp-typescript \
+    --ignore=node_modules/gulp-webpack \
+    --ignore=node_modules/webpack \
     --icon=resources/app.ico \
     --version-string.FileDescription=SavannaAlert \
     --version-string.ProductName=SavannaAlert \

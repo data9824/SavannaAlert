@@ -55,7 +55,7 @@ app.on('ready', () => {
 					type: "info",
 					buttons: [ "OK" ],
 					title: "バージョン情報",
-					message: "SavannaAlert バージョン 20160403-2",
+					message: "SavannaAlert バージョン 20160406",
 				});
 			},
 		},
