@@ -6,6 +6,7 @@ import * as VueRouter from 'vue-router';
 import VueComponent from 'vue-class-component';
 import * as $ from 'jquery';
 import * as electron from 'electron';
+declare var componentHandler: any;
 let ipcRenderer: Electron.IpcRenderer = require('electron').ipcRenderer;
 let clipboard: Electron.Clipboard = require('electron').clipboard;
 
@@ -126,6 +127,7 @@ class ChannelListView extends Vue {
 					type="text"
 					v-model="url"
 				/>
+				<label class="mdl-textfield__label" for="channel-url"></label>
 			</div>
 			<button
 				class="
@@ -188,6 +190,7 @@ class ChannelBoxView extends Vue implements IAppModelListener {
 		};
 	}
 	public attached(): void {
+		componentHandler.upgradeDom();
 		ipcRenderer.send("getChannels");
 		ipcRenderer.on("getChannels", (e: any, arg: string) => {
 			appModel.channels = JSON.parse(arg);
