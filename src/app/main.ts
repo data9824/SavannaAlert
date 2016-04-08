@@ -15,6 +15,8 @@ let app: Electron.App = electron.app;
 let dialog: Electron.Dialog = electron.dialog;
 let mainWindow: BrowserWindow = undefined;
 let tray: Electron.Tray = undefined;
+const trayImagePath: string = __dirname + "/../browser/tray.png";
+const trayActiveImagePath: string = __dirname + "/../browser/tray-active.png";
 
 function createWindow() {
 	'use strict';
@@ -39,7 +41,7 @@ function createWindow() {
 }
 
 app.on('ready', () => {
-	tray = new electron.Tray(__dirname + "/../browser/tray.png");
+	tray = new electron.Tray(trayImagePath);
 	let contextMenu: Electron.Menu = electron.Menu.buildFromTemplate([
 		{
 			label: "設定...",
@@ -54,7 +56,7 @@ app.on('ready', () => {
 					type: "info",
 					buttons: [ "OK" ],
 					title: "バージョン情報",
-					message: "SavannaAlert バージョン 20160406",
+					message: "SavannaAlert バージョン 20160408",
 				});
 			},
 		},
@@ -112,6 +114,21 @@ setInterval(
 	},
 	30000);
 
+function updateTrayIcon(): void {
+	'use strict';
+	let broadcastingChannelExists: boolean = false;
+	for (let key in lastChannelBroadcastings) {
+		if (lastChannelBroadcastings[key]) {
+			broadcastingChannelExists = true;
+		}
+	}
+	if (broadcastingChannelExists) {
+		tray.setImage(trayActiveImagePath);
+	} else {
+		tray.setImage(trayImagePath);
+	}
+}
+
 function alertChannels(): void {
 	'use strict';
 	channels.forEach((channel: IChannel) => {
@@ -146,6 +163,7 @@ function alertChannels(): void {
 				} else {
 					lastChannelBroadcastings[url] = false;
 				}
+				updateTrayIcon();
 				if (mainWindow !== undefined) {
 					mainWindow.webContents.send("updateChannelStatus", JSON.stringify({
 						url: url,
@@ -179,6 +197,17 @@ ipcMain.on("save", (event: IPCMainEvent, arg: string) => {
 		channels: channels,
 	};
 	fs.writeFileSync(getConfigFileName(), JSON.stringify(config));
+	let channelUrlSet: boolean[] = [];
+	channels.forEach((channel: IChannel) => {
+		channelUrlSet[channel.url] = true;
+	});
+	for (let key in lastChannelBroadcastings) {
+		if (!(key in channelUrlSet)) {
+			delete lastChannelBroadcastings[key];
+		}
+	}
+	updateTrayIcon();
+
 });
 ipcMain.on("getChannels", (event: IPCMainEvent) => {
 	event.sender.send("getChannels", JSON.stringify(channels));
