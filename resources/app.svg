@@ -37,8 +37,8 @@
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.35"
-     inkscape:cx="-258.46104"
-     inkscape:cy="418.07001"
+     inkscape:cx="-497.18676"
+     inkscape:cy="499.05218"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -77,6 +77,26 @@
      inkscape:label="レイヤー 1"
      inkscape:groupmode="layer"
      id="layer1">
+    <rect
+       style="fill:none;fill-opacity:1;stroke:none;stroke-width:20;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect4164-8"
+       width="760"
+       height="760"
+       x="-800"
+       y="152.3622"
+       inkscape:export-filename="C:\Users\Public\Documents\SavannaAlert\src\browser\tray@2x.png"
+       inkscape:export-xdpi="5.6842103"
+       inkscape:export-ydpi="5.6842103" />
+    <rect
+       style="fill:none;fill-opacity:1;stroke:none;stroke-width:20;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect4164"
+       width="760"
+       height="760"
+       x="-1600"
+       y="152.3622"
+       inkscape:export-filename="C:\Users\Public\Documents\SavannaAlert\src\browser\tray-active.png"
+       inkscape:export-xdpi="2.8421052"
+       inkscape:export-ydpi="2.8421052" />
     <path
        style="fill:#0545b0;fill-opacity:1;stroke:#ffffff;stroke-width:20;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        d="M 142.12235,696.56717 A 300,300 0 0 1 195.03168,294.6809 300,300 0 0 1 600,312.3622 300,300 0 0 1 617.68129,717.33052 300,300 0 0 1 215.79502,770.23984 L 77.86796,834.49425 Z"
@@ -114,73 +134,87 @@
          id="path4169-7-4"
          style="fill:#00baec;fill-opacity:1;stroke:none;stroke-width:10;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
     </g>
-    <path
-       style="fill:#0545b0;fill-opacity:1;stroke:none;stroke-width:20;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m -615.74561,696.56716 a 300,300 0 0 1 52.90933,-401.88626 300,300 0 0 1 404.96832,17.6813 300,300 0 0 1 17.68129,404.96831 300,300 0 0 1 -401.88627,52.90932 L -680,834.49424 Z"
-       id="path4216-1"
-       inkscape:connector-curvature="0"
-       inkscape:export-xdpi="7.0799999"
-       inkscape:export-ydpi="7.0799999"
-       inkscape:export-filename="C:\Users\Public\Documents\SavannaAlert\src\browser\tray@2x.png" />
-    <circle
-       style="fill:#808080;fill-opacity:1;stroke:none;stroke-width:10;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       id="path4169-6"
-       cx="-560"
-       cy="524.49426"
-       r="75"
-       inkscape:export-filename="C:\Users\Public\Documents\SavannaAlert\src\browser\tray@2x.png"
-       inkscape:export-xdpi="7.0799999"
-       inkscape:export-ydpi="7.0799999" />
-    <circle
-       style="fill:#808080;fill-opacity:1;stroke:none;stroke-width:10;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       id="path4169-7-1"
-       cx="-375"
-       cy="524.49426"
-       r="75"
-       inkscape:export-filename="C:\Users\Public\Documents\SavannaAlert\src\browser\tray@2x.png"
-       inkscape:export-xdpi="7.0799999"
-       inkscape:export-ydpi="7.0799999" />
-    <circle
-       style="fill:#808080;fill-opacity:1;stroke:none;stroke-width:10;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       id="path4169-7-4-9"
-       cx="-190"
-       cy="524.49426"
-       r="75"
-       inkscape:export-filename="C:\Users\Public\Documents\SavannaAlert\src\browser\tray@2x.png"
-       inkscape:export-xdpi="7.0799999"
-       inkscape:export-ydpi="7.0799999" />
-    <path
-       style="fill:#0545b0;fill-opacity:1;stroke:none;stroke-width:20;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m -1280.7456,704.43517 a 300,300 0 0 1 52.9093,-401.8863 300,300 0 0 1 404.96834,17.6813 300,300 0 0 1 17.68129,404.9683 300,300 0 0 1 -401.88623,52.9093 L -1345,842.36217 Z"
-       id="path4216-15"
-       inkscape:connector-curvature="0"
-       inkscape:export-xdpi="7.0799999"
-       inkscape:export-ydpi="7.0799999"
-       inkscape:export-filename="C:\Users\Public\Documents\SavannaAlert\src\browser\tray-active@2.png" />
     <g
-       id="g4221-8"
-       transform="translate(-655,2.2107222e-5)"
-       inkscape:export-xdpi="7.0799999"
-       inkscape:export-ydpi="7.0799999"
-       inkscape:export-filename="C:\Users\Public\Documents\SavannaAlert\src\browser\tray-active@2.png">
+       id="g4158"
+       transform="translate(-44.999999,2.8679617)"
+       inkscape:export-filename="C:\Users\Public\Documents\SavannaAlert\src\browser\tray@2x.png"
+       inkscape:export-xdpi="5.6842103"
+       inkscape:export-ydpi="5.6842103">
+      <path
+         inkscape:export-filename="C:\Users\Public\Documents\SavannaAlert\src\browser\tray@2x.png"
+         inkscape:export-ydpi="7.0799999"
+         inkscape:export-xdpi="7.0799999"
+         inkscape:connector-curvature="0"
+         id="path4216-1"
+         d="m -615.74561,696.56716 a 300,300 0 0 1 52.90933,-401.88626 300,300 0 0 1 404.96832,17.6813 300,300 0 0 1 17.68129,404.96831 300,300 0 0 1 -401.88627,52.90932 L -680,834.49424 Z"
+         style="fill:#0545b0;fill-opacity:1;stroke:none;stroke-width:20;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
       <circle
+         inkscape:export-ydpi="7.0799999"
+         inkscape:export-xdpi="7.0799999"
+         inkscape:export-filename="C:\Users\Public\Documents\SavannaAlert\src\browser\tray@2x.png"
          r="75"
-         cy="532.36218"
-         cx="-570"
-         id="path4169-3"
-         style="fill:#f13389;fill-opacity:1;stroke:none;stroke-width:10;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+         cy="524.49426"
+         cx="-560"
+         id="path4169-6"
+         style="fill:#808080;fill-opacity:1;stroke:none;stroke-width:10;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
       <circle
+         inkscape:export-ydpi="7.0799999"
+         inkscape:export-xdpi="7.0799999"
+         inkscape:export-filename="C:\Users\Public\Documents\SavannaAlert\src\browser\tray@2x.png"
          r="75"
-         cy="532.36218"
-         cx="-385"
-         id="path4169-7-0"
-         style="fill:#1ac52e;fill-opacity:1;stroke:none;stroke-width:10;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+         cy="524.49426"
+         cx="-375"
+         id="path4169-7-1"
+         style="fill:#808080;fill-opacity:1;stroke:none;stroke-width:10;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
       <circle
+         inkscape:export-ydpi="7.0799999"
+         inkscape:export-xdpi="7.0799999"
+         inkscape:export-filename="C:\Users\Public\Documents\SavannaAlert\src\browser\tray@2x.png"
          r="75"
-         cy="532.36218"
-         cx="-200"
-         id="path4169-7-4-1"
-         style="fill:#00baec;fill-opacity:1;stroke:none;stroke-width:10;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+         cy="524.49426"
+         cx="-190"
+         id="path4169-7-4-9"
+         style="fill:#808080;fill-opacity:1;stroke:none;stroke-width:10;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    </g>
+    <g
+       id="g4151"
+       transform="translate(-180,-4.9999769)"
+       inkscape:export-filename="C:\Users\Public\Documents\SavannaAlert\src\browser\tray-active.png"
+       inkscape:export-xdpi="2.8421052"
+       inkscape:export-ydpi="2.8421052">
+      <path
+         inkscape:export-filename="C:\Users\Public\Documents\SavannaAlert\src\browser\tray-active@2.png"
+         inkscape:export-ydpi="7.0799999"
+         inkscape:export-xdpi="7.0799999"
+         inkscape:connector-curvature="0"
+         id="path4216-15"
+         d="m -1280.7456,704.43517 a 300,300 0 0 1 52.9093,-401.8863 300,300 0 0 1 404.96834,17.6813 300,300 0 0 1 17.68129,404.9683 300,300 0 0 1 -401.88623,52.9093 L -1345,842.36217 Z"
+         style="fill:#0545b0;fill-opacity:1;stroke:none;stroke-width:20;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+      <g
+         inkscape:export-filename="C:\Users\Public\Documents\SavannaAlert\src\browser\tray-active@2.png"
+         inkscape:export-ydpi="7.0799999"
+         inkscape:export-xdpi="7.0799999"
+         transform="translate(-655,2.2107222e-5)"
+         id="g4221-8">
+        <circle
+           style="fill:#f13389;fill-opacity:1;stroke:none;stroke-width:10;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           id="path4169-3"
+           cx="-570"
+           cy="532.36218"
+           r="75" />
+        <circle
+           style="fill:#1ac52e;fill-opacity:1;stroke:none;stroke-width:10;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           id="path4169-7-0"
+           cx="-385"
+           cy="532.36218"
+           r="75" />
+        <circle
+           style="fill:#00baec;fill-opacity:1;stroke:none;stroke-width:10;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           id="path4169-7-4-1"
+           cx="-200"
+           cy="532.36218"
+           r="75" />
+      </g>
     </g>
   </g>
 </svg>
