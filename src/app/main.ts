@@ -1,9 +1,9 @@
 /// <reference path="../../typings/browser.d.ts" />
-import BrowserWindow = Electron.BrowserWindow;
 
-import * as electron from 'electron';
+import BrowserWindow = Electron.BrowserWindow;
 import IPCMain = Electron.IPCMain;
 import IPCMainEvent = Electron.IPCMainEvent;
+import * as electron from 'electron';
 import * as http from "http";
 import * as fs from "fs";
 import * as notifier from "node-notifier";
@@ -11,12 +11,26 @@ import {IncomingMessage} from "http";
 import {ClientRequest} from "http";
 import {NodeNotifier} from "node-notifier";
 import {Notification} from "node-notifier";
-let app: Electron.App = electron.app;
-let dialog: Electron.Dialog = electron.dialog;
-let mainWindow: BrowserWindow = undefined;
-let tray: Electron.Tray = undefined;
+
+interface IChannel {
+	url: string;
+}
+
+interface IConfig {
+	version: number;
+	channels: IChannel[];
+}
+
 const trayImagePath: string = __dirname + "/../browser/tray.png";
 const trayActiveImagePath: string = __dirname + "/../browser/tray-active.png";
+
+let app: Electron.App = electron.app;
+let dialog: Electron.Dialog = electron.dialog;
+let ipcMain: IPCMain = electron.ipcMain;
+let mainWindow: BrowserWindow = undefined;
+let tray: Electron.Tray = undefined;
+let channels: IChannel[] = [];
+let lastChannelBroadcastings: boolean[] = [];
 
 function createWindow() {
 	'use strict';
@@ -38,47 +52,6 @@ function createWindow() {
 	mainWindow.on('closed', () => {
 		mainWindow = undefined;
 	});
-}
-
-app.on('ready', () => {
-	tray = new electron.Tray(trayImagePath);
-	let contextMenu: Electron.Menu = electron.Menu.buildFromTemplate([
-		{
-			label: "設定...",
-			click: () => {
-				createWindow();
-			},
-		},
-		{
-			label: "バージョン情報...",
-			click: () => {
-				dialog.showMessageBox({
-					type: "info",
-					buttons: [ "OK" ],
-					title: "バージョン情報",
-					message: "SavannaAlert バージョン 20160408",
-				});
-			},
-		},
-		{
-			label: "終了",
-			click: () => {
-				app.quit();
-			},
-		},
-	]);
-	tray.setToolTip("SavannaAlert");
-	tray.setContextMenu(contextMenu);
-	tray.on("click", createWindow);
-});
-
-app.on("window-all-closed", () => {
-	// do nothing not to quit the app
-});
-
-interface IChannel {
-	url: string;
-	title: string;
 }
 
 function checkBroadcasting(body: string): boolean {
@@ -104,15 +77,6 @@ function extractChannelTitle(body: string): string {
 	}
 	return body.substr(titleIndex + titleMarker.length, end - (titleIndex + titleMarker.length));
 }
-
-let channels: IChannel[] = [];
-let lastChannelBroadcastings: boolean[] = [];
-
-setInterval(
-	() => {
-		alertChannels();
-	},
-	30000);
 
 function updateTrayIcon(): void {
 	'use strict';
@@ -179,17 +143,52 @@ function alertChannels(): void {
 	});
 }
 
-interface IConfig {
-	version: number;
-	channels: IChannel[];
-}
-
 function getConfigFileName(): string {
 	'use strict';
 	return app.getPath('userData') + "/config.json";
 }
 
-let ipcMain: IPCMain = electron.ipcMain;
+function deleteDeprecatedConfig(config: IConfig): void {
+	'use strict';
+	for (let i: number = 0; i < config.channels.length; ++i) {
+		delete config.channels[i]["title"];
+	}
+}
+
+app.on('ready', () => {
+	tray = new electron.Tray(trayImagePath);
+	let contextMenu: Electron.Menu = electron.Menu.buildFromTemplate([
+		{
+			label: "設定...",
+			click: () => {
+				createWindow();
+			},
+		},
+		{
+			label: "バージョン情報...",
+			click: () => {
+				dialog.showMessageBox({
+					type: "info",
+					buttons: [ "OK" ],
+					title: "バージョン情報",
+					message: "SavannaAlert バージョン 20160408",
+				});
+			},
+		},
+		{
+			label: "終了",
+			click: () => {
+				app.quit();
+			},
+		},
+	]);
+	tray.setToolTip("SavannaAlert");
+	tray.setContextMenu(contextMenu);
+	tray.on("click", createWindow);
+});
+app.on("window-all-closed", () => {
+	// do nothing not to quit the app
+});
 ipcMain.on("save", (event: IPCMainEvent, arg: string) => {
 	channels = JSON.parse(arg);
 	let config: IConfig = {
@@ -215,18 +214,21 @@ ipcMain.on("getChannels", (event: IPCMainEvent) => {
 ipcMain.on("alertChannels", (event: IPCMainEvent) => {
 	alertChannels();
 });
-
 try {
 	let configText: string = fs.readFileSync(getConfigFileName(), "utf8");
 	let config: IConfig = JSON.parse(configText);
+	deleteDeprecatedConfig(config);
 	channels = config.channels;
 } catch (e) {
 	channels = [
 		{
 			url: "http://afreecatv.jp/35841790",
-			title: "",
 		},
 	];
 }
-
+setInterval(
+	() => {
+		alertChannels();
+	},
+	30000);
 alertChannels();
