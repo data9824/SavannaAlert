@@ -4,14 +4,13 @@ import BrowserWindow = Electron.BrowserWindow;
 import * as electron from 'electron';
 import IPCMain = Electron.IPCMain;
 import IPCMainEvent = Electron.IPCMainEvent;
-import {Socket} from "net";
-import {Stats} from "fs";
-import {parse} from "querystring";
+import * as http from "http";
+import * as fs from "fs";
+import * as notifier from "node-notifier";
 import {IncomingMessage} from "http";
+import {ClientRequest} from "http";
 import {NodeNotifier} from "node-notifier";
-let fs: any = require('fs');
-let http: any = require('http');
-let notifier: NodeNotifier = require('node-notifier');
+import {Notification} from "node-notifier";
 let app: Electron.App = electron.app;
 let dialog: Electron.Dialog = electron.dialog;
 let mainWindow: BrowserWindow = undefined;
@@ -33,7 +32,7 @@ function createWindow() {
 	mainWindow = new electron.BrowserWindow(browserWindowOptions);
 	mainWindow.setMenu(null);
 	mainWindow.loadURL('file://' + __dirname + '/../browser/index.html');
-//	mainWindow.webContents.openDevTools();
+	// mainWindow.webContents.openDevTools();
 	mainWindow.on('closed', () => {
 		mainWindow = undefined;
 	});
@@ -81,6 +80,7 @@ interface IChannel {
 }
 
 function checkBroadcasting(body: string): boolean {
+	'use strict';
 	let notBroadcastingText: string = '<div id="broadTitle"></div>';
 	let divIndex: number = body.indexOf('<div id="broadTitle">');
 	if (divIndex < 0) {
@@ -90,6 +90,7 @@ function checkBroadcasting(body: string): boolean {
 }
 
 function extractChannelTitle(body: string): string {
+	'use strict';
 	let titleMarker: string = '<span id="channelName_view">';
 	let titleIndex: number = body.indexOf(titleMarker);
 	if (titleIndex < 0) {
@@ -105,20 +106,23 @@ function extractChannelTitle(body: string): string {
 let channels: IChannel[] = [];
 let lastChannelBroadcastings: boolean[] = [];
 
-setInterval(() => {
-	alertChannels();
-}, 30000);
+setInterval(
+	() => {
+		alertChannels();
+	},
+	30000);
 
 function alertChannels(): void {
+	'use strict';
 	channels.forEach((channel: IChannel) => {
-		let request = http.get(channel.url, (res: IncomingMessage) => {
+		let request: ClientRequest = http.get(channel.url, (res: IncomingMessage) => {
 			let url: string = channel.url;
 			let body: string = "";
 			res.setEncoding("utf8");
 			res.on("data", (chunk: string) => {
 				body += chunk;
 			});
-			res.on("error", (error) => {
+			res.on("error", (error: any) => {
 				console.log(`Conection Error : ${error.message}`);
 			});
 			res.on("end", () => {
@@ -135,7 +139,7 @@ function alertChannels(): void {
 							sound: true,
 							wait: true,
 						});
-						notifier.on("click", (notifierObject, options) => {
+						notifier.on("click", (notifierObject: NodeNotifier, options: Notification) => {
 							electron.shell.openExternal(options.message);
 						});
 					}
@@ -151,7 +155,7 @@ function alertChannels(): void {
 				}
 			});
 		});
-		request.on("error", (error) => {
+		request.on("error", (error: any) => {
 			console.log(`Conection Error : ${error.message}`);
 		});
 	});
@@ -163,10 +167,11 @@ interface IConfig {
 }
 
 function getConfigFileName(): string {
+	'use strict';
 	return app.getPath('userData') + "/config.json";
 }
 
-let ipcMain: IPCMain = require('electron').ipcMain;
+let ipcMain: IPCMain = electron.ipcMain;
 ipcMain.on("save", (event: IPCMainEvent, arg: string) => {
 	channels = JSON.parse(arg);
 	let config: IConfig = {

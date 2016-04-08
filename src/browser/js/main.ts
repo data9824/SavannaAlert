@@ -7,8 +7,8 @@ import VueComponent from 'vue-class-component';
 import * as $ from 'jquery';
 import * as electron from 'electron';
 declare var componentHandler: any;
-let ipcRenderer: Electron.IpcRenderer = require('electron').ipcRenderer;
-let clipboard: Electron.Clipboard = require('electron').clipboard;
+let ipcRenderer: Electron.IpcRenderer = electron.ipcRenderer;
+let clipboard: Electron.Clipboard = electron.clipboard;
 
 interface IChannel {
 	url: string;
@@ -20,6 +20,7 @@ interface IAppModelListener {
 }
 
 class AppModel {
+	public channels: IChannel[] = [];
 	private listeners: IAppModelListener[] = [];
 	public addListener(listener: IAppModelListener): void {
 		this.listeners.push(listener);
@@ -30,7 +31,6 @@ class AppModel {
 			this.listeners.splice(index, 1);
 		}
 	}
-	public channels: IChannel[] = [];
 	public fireChanged(): void {
 		this.listeners.forEach((listener: IAppModelListener) => {
 			listener.onAppModelChanged(this);
@@ -76,7 +76,7 @@ class ChannelView extends Vue {
 		return {
 			title: "",
 			broadcasting: "",
-		}
+		};
 	}
 	public attached(): void {
 		this.updateChannelStatus = (e: any, arg: string) => {
@@ -94,8 +94,7 @@ class ChannelView extends Vue {
 		ipcRenderer.removeListener("updateChannelStatus", this.updateChannelStatus);
 		this.updateChannelStatus = undefined;
 	}
-	public remove(item: IChannel): void
-	{
+	public remove(item: IChannel): void	{
 		appModel.channels.splice(this.$get("index"), 1);
 		ipcRenderer.send("save", JSON.stringify(appModel.channels));
 		appModel.fireChanged();
@@ -158,7 +157,7 @@ class ChannelFormView extends Vue {
 		this.url = clipboard.readText("selection").trim();
 	}
 	public onSubmit(): void {
-		const regexp = new RegExp("^(.+[^.]\.)?afreecatv\.jp");
+		const regexp: RegExp = new RegExp("^(.+[^.]\.)?afreecatv\.jp");
 		if (this.url === '' || !this.url.match(regexp)) {
 			this.url = '';
 			return;
