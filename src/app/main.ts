@@ -23,6 +23,7 @@ interface IConfig {
 
 const trayImagePath: string = __dirname + "/../browser/tray.png";
 const trayActiveImagePath: string = __dirname + "/../browser/tray-active.png";
+const pollingIntervalMillisec: number = 60000;
 
 let app: Electron.App = electron.app;
 let dialog: Electron.Dialog = electron.dialog;
@@ -230,5 +231,5 @@ setInterval(
 	() => {
 		alertChannels();
 	},
-	30000);
+	pollingIntervalMillisec);
 alertChannels();
