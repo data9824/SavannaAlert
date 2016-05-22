@@ -97,7 +97,7 @@ function updateTrayIcon(): void {
 function alertChannels(): void {
 	'use strict';
 	channels.forEach((channel: IChannel) => {
-		let request: ClientRequest = http.get(channel.url, (res: IncomingMessage) => {
+		let request: ClientRequest = http.get(channel.url + '/live', (res: IncomingMessage) => {
 			let url: string = channel.url;
 			let body: string = "";
 			res.setEncoding("utf8");
@@ -122,7 +122,7 @@ function alertChannels(): void {
 							wait: true,
 						});
 						notifier.on("click", (notifierObject: NodeNotifier, options: Notification) => {
-							electron.shell.openExternal(options.message);
+							electron.shell.openExternal(options.message + '/live');
 						});
 					}
 				} else {
@@ -153,6 +153,10 @@ function deleteDeprecatedConfig(config: IConfig): void {
 	'use strict';
 	for (let i: number = 0; i < config.channels.length; ++i) {
 		delete config.channels[i]["title"];
+		let matches: RegExpMatchArray = config.channels[i]["url"].match(/(.*)?\/live$/);
+		if (matches !== null) {
+			config.channels[i]["url"] = matches[1];
+		}
 	}
 }
 
@@ -172,7 +176,7 @@ app.on('ready', () => {
 					type: "info",
 					buttons: [ "OK" ],
 					title: "バージョン情報",
-					message: "SavannaAlert バージョン 20160408",
+					message: "SavannaAlert バージョン 20160522",
 				});
 			},
 		},

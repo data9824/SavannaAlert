@@ -65,6 +65,7 @@ interface IChannelStatus {
 				v-on:click="remove(item)"
 			><i class="fa fa-trash"></i></button>
 		</div>
+		<div style="clear: both"></div>
 	`,
 	props: ["item", "index"],
 })
@@ -100,7 +101,7 @@ class ChannelView extends Vue {
 		appModel.fireChanged();
 	}
 	public openPage(): void {
-		electron.shell.openExternal(this.$get("item").url);
+		electron.shell.openExternal(this.$get("item").url + '/live');
 	}
 }
 
@@ -157,13 +158,20 @@ class ChannelFormView extends Vue {
 		this.url = clipboard.readText("selection").trim();
 	}
 	public onSubmit(): void {
+		let matches: RegExpMatchArray = this.url.match(/(.*)?\/live$/);
+		let url: string;
+		if (matches !== null) {
+			url = matches[1];
+		} else {
+			url = this.url;
+		}
 		const regexp: RegExp = new RegExp("^(.+[^.]\.)?afreecatv\.jp");
-		if (this.url === '' || !this.url.match(regexp)) {
+		if (url === '' || !url.match(regexp)) {
 			this.url = '';
 			return;
 		}
 		this.$dispatch('add-channel', {
-			url: this.url,
+			url: url,
 		});
 		this.url = '';
 	}

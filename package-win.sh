@@ -1,7 +1,7 @@
 #!/bin/bash
 
 rm -rf pack/SavannaAlert-win32-ia32/
-./node_modules/.bin/electron-packager . SavannaAlert --platform=win32 --arch=ia32 --version=0.36.12 \
+./node_modules/.bin/electron-packager . SavannaAlert --platform=win32 --arch=ia32 --version=1.1.1 \
     --ignore=pack --ignore=src --ignore=typings --ignore=build --ignore=.idea --ignore=resources \
     --ignore=node_modules/del \
     --ignore=node_modules/gulp \
