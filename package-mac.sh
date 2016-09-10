@@ -1,7 +1,7 @@
 #!/bin/bash
 
 rm -rf pack/SavannaAlert-darwin-x64/
-./node_modules/.bin/electron-packager . SavannaAlert --platform=darwin --arch=x64 --version=1.1.1 \
+./node_modules/.bin/electron-packager . SavannaAlert --platform=darwin --arch=x64 --version=1.3.5 \
     --ignore=pack --ignore=src --ignore=typings --ignore=build --ignore=.idea --ignore=resources \
     --ignore=node_modules/del \
     --ignore=node_modules/gulp \

@@ -158,13 +158,7 @@ class ChannelFormView extends Vue {
 		this.url = clipboard.readText("selection").trim();
 	}
 	public onSubmit(): void {
-		let matches: RegExpMatchArray = this.url.match(/(.*)?\/live$/);
-		let url: string;
-		if (matches !== null) {
-			url = matches[1];
-		} else {
-			url = this.url;
-		}
+		let url: string = this.url.replace(/\/live$/, '').replace(/^http:\/\/live\./, 'http://');
 		const regexp: RegExp = new RegExp("^(.+[^.]\.)?afreecatv\.jp");
 		if (url === '' || !url.match(regexp)) {
 			this.url = '';

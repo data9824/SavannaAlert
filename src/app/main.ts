@@ -57,8 +57,8 @@ function createWindow() {
 
 function checkBroadcasting(body: string): boolean {
 	'use strict';
-	let notBroadcastingText: string = '<div id="broadTitle"></div>';
-	let divIndex: number = body.indexOf('<div id="broadTitle">');
+	let notBroadcastingText: string = '<meta property="og:image" content="" />';
+	let divIndex: number = body.indexOf('<meta property="og:image" content="');
 	if (divIndex < 0) {
 		return false;
 	}
@@ -67,12 +67,12 @@ function checkBroadcasting(body: string): boolean {
 
 function extractChannelTitle(body: string): string {
 	'use strict';
-	let titleMarker: string = '<span id="channelName_view">';
+	let titleMarker: string = '<meta property="og:title" content="';
 	let titleIndex: number = body.indexOf(titleMarker);
 	if (titleIndex < 0) {
 		return "(タイトル不明)";
 	}
-	let end: number = body.indexOf('</span>', titleIndex);
+	let end: number = body.indexOf('" />', titleIndex);
 	if (end < 0) {
 		return "(タイトル不明(2))";
 	}
@@ -97,7 +97,8 @@ function updateTrayIcon(): void {
 function alertChannels(): void {
 	'use strict';
 	channels.forEach((channel: IChannel) => {
-		let request: ClientRequest = http.get(channel.url + '/live', (res: IncomingMessage) => {
+		let liveUrl: string = channel.url.replace(/^http:\/\//, 'http://live.');
+		let request: ClientRequest = http.get(liveUrl, (res: IncomingMessage) => {
 			let url: string = channel.url;
 			let body: string = "";
 			res.setEncoding("utf8");
@@ -176,7 +177,7 @@ app.on('ready', () => {
 					type: "info",
 					buttons: [ "OK" ],
 					title: "バージョン情報",
-					message: "SavannaAlert バージョン 20160522",
+					message: "SavannaAlert バージョン 20160910",
 				});
 			},
 		},
