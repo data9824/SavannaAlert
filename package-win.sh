@@ -9,7 +9,7 @@ rm -rf release/SavannaAlert-win32-ia32/
     --version-string.OriginalFilename=SavannaAlert.exe \
     --version-string.LegalCopyright="CC0 1.0 Universal" \
     --out release --overwrite
-cp -r node_modules/node-notifier/ pack/SavannaAlert-win32-ia32/resources/app/node_modules/
+cp -r node_modules/node-notifier/ release/SavannaAlert-win32-ia32/resources/app/node_modules/
 # 壊れたZIPファイルが生成されてしまう
 # pushd .
 # cd release/
